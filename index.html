@@ -80,6 +80,16 @@
             .summary-value {
                 font-size: 1.25rem;
             }
+            .progress-info {
+                font-size: 0.6rem;
+                color: #6b7280;
+                margin-top: 0.25rem;
+            }
+            .subject-meta {
+                font-size: 0.6rem;
+                color: #6b7280;
+                margin-top: 0.1rem;
+            }
         }
         
         @media (min-width: 400px) {
@@ -483,7 +493,7 @@
                             <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-gradient-to-r ${color.bg} flex-shrink-0"></div>
                             <span class="font-medium text-gray-800 text-xs sm:text-sm subject-name">${subject.name}</span>
                         </div>
-                        <div class="sm:hidden text-xxs text-gray-500 mt-1 ml-3">
+                        <div class="sm:hidden subject-meta">
                             ${subject.total} aulas • Meta: ${dailyRecommendation}/dia
                         </div>
                     </td>
@@ -498,10 +508,7 @@
                             <div class="flex-1 bg-gray-200 rounded-full h-2 sm:h-3 overflow-hidden">
                                 <div class="progress-bar h-2 sm:h-3 bg-gradient-to-r ${color.bg}" style="width: ${percentage}%"></div>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-xxs sm:text-xs font-semibold ${color.text} sm:hidden">${percentage}% concluído</span>
-                                <span class="text-xxs sm:text-xs font-semibold ${color.text} hidden sm:inline">${percentage}%</span>
-                            </div>
+                            <span class="progress-info">${percentage}% concluído</span>
                         </div>
                     </td>
                     <td class="py-2 px-1 sm:px-2 text-center hidden md:table-cell">
