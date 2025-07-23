@@ -243,38 +243,28 @@
         </div>
     </div>
 
-    <!-- Adicione isso antes do seu script principal -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-<script>
-  // Sua configuração do Firebase - substituirei os espaços reservados aqui.
-  // Você encontrará isso no Console Firebase em 'Project settings' -> 'Your apps'
-  const firebaseConfig = {
-  apiKey: "AIzaSyAknKpdtYMAPmb5fs4d7woZ_UI-AV4aUVQ",
-  authDomain: "painel-de-estudos-mustarda.firebaseapp.com",
-  databaseURL: "https://painel-de-estudos-mustarda-default-rtdb.firebaseio.com",
-  projectId: "painel-de-estudos-mustarda",
-  storageBucket: "painel-de-estudos-mustarda.firebasestorage.app",
-  messagingSenderId: "56475360400",
-  appId: "1:56475360400:web:2b4a6521701df478c0cc15",
-  measurementId: "G-RYHFHW8DXL"
-};
+    <!-- Firebase Integration -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAknKpdtYMAPmb5fs4d7woZ_UI-AV4aUVQ",
+            authDomain: "painel-de-estudos-mustarda.firebaseapp.com",
+            databaseURL: "https://painel-de-estudos-mustarda-default-rtdb.firebaseio.com",
+            projectId: "painel-de-estudos-mustarda",
+            storageBucket: "painel-de-estudos-mustarda.firebasestorage.app",
+            messagingSenderId: "56475360400",
+            appId: "1:56475360400:web:2b4a6521701df478c0cc15",
+            measurementId: "G-RYHFHW8DXL"
+        };
 
-  // Inicialize o Firebase
-  firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
 
-  // Obtenha uma referência para o serviço de autenticação
-  const auth = firebase.auth();
-</script>
-<!-- Seu script atual viria depois disso -->
-<script>
-    // Seus scripts existentes
-    // Global variables
-    let subjects = JSON.parse(localStorage.getItem('studySubjects')) || [];
-    // ... o restante do seu código JavaScript
-</script>
-
-    
+    <!-- Main Application Script -->
     <script>
         // Global variables
         let subjects = JSON.parse(localStorage.getItem('studySubjects')) || [];
@@ -310,6 +300,7 @@
             renderSubjects();
             renderProgressTable();
             updateSummary();
+            displayMotivationalTip(); // Garantir que a dica é exibida ao carregar
         }
 
         // Load saved dates
@@ -623,8 +614,8 @@
             "📌 Crase não é um bicho-papão — é só união de preposição com artigo!",
             "📚 Concordância verbal é como respeito: sempre acompanha o sujeito.",
             "🗣️ Evite o pleonasmo: se é desnecessário, é redundante!",
-            "📖 A vírgula pode salvar vidas: ‘Vamos jantar, vovô’ não é ‘Vamos jantar vovô’.",
-            "🔠 Pronomes demonstrativos dão o tom: ‘este’ se refere ao que está próximo de quem fala.",
+            "📖 A vírgula pode salvar vidas: 'Vamos jantar, vovô' não é 'Vamos jantar vovô'.",
+            "🔠 Pronomes demonstrativos dão o tom: 'este' se refere ao que está próximo de quem fala.",
             "🧩 Coerência e coesão são a alma de um bom texto. Conecte ideias, não apenas frases.",
             "✒️ A ortografia correta é o cartão de visita da sua comunicação.",
             "🔍 Observe o contexto: muitas palavras mudam de classe e sentido dependendo da frase.",
@@ -634,7 +625,7 @@
             "🔥 A consistência é mais importante que a intensidade.",
         ];
 
-        // Toggle settings menu
+        // Toggle settings menu - CORREÇÃO IMPLEMENTADA
         function toggleSettings() {
             const content = document.getElementById('settingsContent');
             const toggle = document.getElementById('settingsToggle');
@@ -642,21 +633,27 @@
             if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
                 toggle.textContent = '📋 Ocultar';
+                toggle.classList.add('bg-blue-100', 'text-blue-700');
+                toggle.classList.remove('bg-gray-100', 'text-gray-700');
             } else {
                 content.classList.add('hidden');
                 toggle.textContent = '📋 Mostrar';
+                toggle.classList.remove('bg-blue-100', 'text-blue-700');
+                toggle.classList.add('bg-gray-100', 'text-gray-700');
             }
         }
 
-        // Display random motivational tip
+        // Display random motivational tip - CORREÇÃO IMPLEMENTADA
         function displayMotivationalTip() {
-            const tip = motivationalTips[Math.floor(Math.random() * motivationalTips.length)];
-            document.getElementById('motivationalTip').textContent = tip;
+            const tipElement = document.getElementById('motivationalTip');
+            if (tipElement) {
+                const randomIndex = Math.floor(Math.random() * motivationalTips.length);
+                tipElement.textContent = motivationalTips[randomIndex];
+            }
         }
 
         // Initialize the application
-        init();
-        displayMotivationalTip();
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
