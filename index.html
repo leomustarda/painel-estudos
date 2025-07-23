@@ -243,6 +243,38 @@
         </div>
     </div>
 
+    <!-- Adicione isso antes do seu script principal -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script>
+  // Sua configuração do Firebase - substituirei os espaços reservados aqui.
+  // Você encontrará isso no Console Firebase em 'Project settings' -> 'Your apps'
+  const firebaseConfig = {
+  apiKey: "AIzaSyAknKpdtYMAPmb5fs4d7woZ_UI-AV4aUVQ",
+  authDomain: "painel-de-estudos-mustarda.firebaseapp.com",
+  databaseURL: "https://painel-de-estudos-mustarda-default-rtdb.firebaseio.com",
+  projectId: "painel-de-estudos-mustarda",
+  storageBucket: "painel-de-estudos-mustarda.firebasestorage.app",
+  messagingSenderId: "56475360400",
+  appId: "1:56475360400:web:2b4a6521701df478c0cc15",
+  measurementId: "G-RYHFHW8DXL"
+};
+
+  // Inicialize o Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Obtenha uma referência para o serviço de autenticação
+  const auth = firebase.auth();
+</script>
+<!-- Seu script atual viria depois disso -->
+<script>
+    // Seus scripts existentes
+    // Global variables
+    let subjects = JSON.parse(localStorage.getItem('studySubjects')) || [];
+    // ... o restante do seu código JavaScript
+</script>
+
+    
     <script>
         // Global variables
         let subjects = JSON.parse(localStorage.getItem('studySubjects')) || [];
